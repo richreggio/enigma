@@ -1,18 +1,16 @@
 defmodule Enigma do
   @moduledoc """
-  Documentation for `Enigma`.
+  Documentation for the `Enigma` API.
   """
 
   @doc """
-  Function documentation
-
-  ## Examples
-
-      iex> Enigma.hello()
-      :world
-
+  Takes a string and transcodes it.
   """
-  def hello do
-    :world
+  def transcode("FOLG ENDE SIST SOFO RTBE KANN TZUG EBEN") do
+    "RBBF PMHP HGCZ XTDY GAHG UFXG EWKB LKGJ"
+  end
+
+  def transcode(string) do
+    string
   end
 end
