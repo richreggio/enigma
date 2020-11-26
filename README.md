@@ -2,6 +2,10 @@
 
 A pure Elixir implementation of the Enigma machine.
 
+Currently in the planning stages.
+
+Please see the enigma_reference.md for information about what needs to be implemented
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
