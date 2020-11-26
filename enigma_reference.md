@@ -15,7 +15,7 @@ It used:
 
 # Rotors
 
-Rotors I-VII (1-8), ß (Beta), and γ (Gamma) will be programmed for this exercise:
+Rotors I-VIII (1-8), ß (Beta), and γ (Gamma) will be programmed for this exercise:
 
 Transforms [ABCDEFGHIJKLMNOPQRSTUVWXYZ] into the corresponding arrays
 
@@ -61,6 +61,8 @@ There are a total of 10 plugs.
 
 They are each capable of swapping
 
+# Transcoding Process
+
 The process for transcoding a character in a 4 rotor Enigma machine is as follows:
 
 1. A character is pressed on the keyboard
@@ -69,7 +71,7 @@ The process for transcoding a character in a 4 rotor Enigma machine is as follow
 4. The second Rotor transforms the character
 5. The third Rotor transforms the character
 6. The fourth Rotor transforms the character
-7. The Reflector transforms the chracter
+7. The Reflector transforms the character
 8. The fourth Rotor transforms the character again
 9. The third Rotor transforms the character again
 10. The second Rotor transforms the character again
@@ -87,7 +89,7 @@ end
 
 Shows the entire message transcoding process for the above message
 This is a 4 rotor Enigma machine, the 4 numbers represent the current positions of the 4 rotors
-The example used Rotors VII, VI, V, and Beta with thin Reflector C (order of Rotors/Reflector is Right to Left)
+The example used Rotors VII, VI, V, and Beta with thin Reflector C
 
 0001 F > KGWNT(R)BLQPAHYDVJIFXEZOCSMU CDTK 25 15 16 26
 
