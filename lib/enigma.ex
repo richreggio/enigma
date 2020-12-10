@@ -13,4 +13,10 @@ defmodule Enigma do
   def transcode(string) do
     string
   end
+
+  def setup_machine(options \\ %{}) do
+    # Sets up the initial state of the Enigma machine
+    # Needs to know which rotors are used, their Ring Setting and their initial position.
+    options
+  end
 end

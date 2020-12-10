@@ -51,15 +51,15 @@ The following Reflectors will be programmed for this exercise:
 
 Transforms [ABCDEFGHIJKLMNOPQRSTUVWXYZ] into the corresponding arrays
 
-Reflector B Thin [ENKQAUYWJICOPBLMDXZVFTHRGS]
+Reflector B Thin(b) [ENKQAUYWJICOPBLMDXZVFTHRGS]
 
-Reflector C Thin [RDOBJNTKVEHMLFCWZAXGYIPSUQ]
+Reflector C Thin(c) [RDOBJNTKVEHMLFCWZAXGYIPSUQ]
 
 # Plugboard
 
 There are a total of 10 plugs.
 
-They are each capable of swapping
+They are each capable of swapping 2 different letters.
 
 # Transcoding Process
 
@@ -71,7 +71,7 @@ The process for transcoding a character in a 4 rotor Enigma machine is as follow
 4. The second Rotor transforms the character
 5. The third Rotor transforms the character
 6. The fourth Rotor transforms the character
-7. The Reflector transforms the character
+7. The Reflector transforms the character and sends it back through the rotors
 8. The fourth Rotor transforms the character again
 9. The third Rotor transforms the character again
 10. The second Rotor transforms the character again
@@ -158,20 +158,36 @@ The example used Rotors VII, VI, V, and Beta with thin Reflector C
 # Single Character Transcoding Process
 
 Enigma machine settings:
-Rotors:
+Rotors: β, V, VI, VIII
+Offsets(Ring setting): 25, 15, 17, 03
+Initial position: CDUN
+Plugbaord configuration: AE.BF.CM.DQ.HU.JN.LX.PR.SZ.VW
+Reflector: c
 
-The first character goes through the transcoding process as follows:
+The fourth character from the previous example goes through the transcoding process as follows:
 
 G > ABCDEF(G)HIJKLMNOPQRSTUVWXYZ
-P EFMQAB(G)UINKXCJORDPZTHWVLYS AE.BF.CM.DQ.HU.JN.LX.PR.SZ.VW
-1 OFRJVM(A)ZHQNBXPYKCULGSWETDI N 03 VIII
-2 (N)UKCHVSMDGTZQFYEWPIALOXRJB U 17 VI
-3 XJMIYVCARQOWH(L)NDSUFKGBEPZT D 15 V
-4 QUNGALXEPKZ(Y)RDSOFTVCMBIHWJ C 25 β
-R RDOBJNTKVEHMLFCWZAXGYIPS(U)Q c
-4 EVTNHQDXWZJFUCPIAMOR(B)SYGLK β
-3 H(V)GPWSUMDBTNCOKXJIQZRFLAEY V
-2 TZDIPNJESYCUHAVRMXGKB(F)QWOL VI
-1 GLQYW(B)TIZDPSFKANJCUXREVMOH VIII
-P E(F)MQABGUINKXCJORDPZTHWVLYS AE.BF.CM.DQ.HU.JN.LX.PR.SZ.VW
+
+P - EFMQAB(G)UINKXCJORDPZTHWVLYS
+
+1 - OFRJVM(A)ZHQNBXPYKCULGSWETDI
+
+2 - (N)UKCHVSMDGTZQFYEWPIALOXRJB
+
+3 - XJMIYVCARQOWH(L)NDSUFKGBEPZT
+
+4 - QUNGALXEPKZ(Y)RDSOFTVCMBIHWJ
+
+R - RDOBJNTKVEHMLFCWZAXGYIPS(U)Q
+
+4 - EVTNHQDXWZJFUCPIAMOR(B)SYGLK
+
+3 - H(V)GPWSUMDBTNCOKXJIQZRFLAEY
+
+2 - TZDIPNJESYCUHAVRMXGKB(F)QWOL
+
+1 - GLQYW(B)TIZDPSFKANJCUXREVMOH
+
+P - E(F)MQABGUINKXCJORDPZTHWVLYS
+
 F < KPTXIG(F)MESAUHYQBOVJCLRZDNW
