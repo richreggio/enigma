@@ -1,6 +1,6 @@
 # Enigma Model
 
-The reference model of Enigma machine I am attempting to use is the **Enigma M4**
+The reference models of Enigma machine I am attempting to use are the **Enigma M4**, **Enigma M3**, and **Enigma I**
 
 I am not sure if I have this figured out correctly, if you feel that I made a mistake, please let me know!
 
@@ -9,9 +9,9 @@ Please see [Crypto Museum](https://www.cryptomuseum.com/crypto/enigma/m4/index.h
 It used:
 
 - 8 different normal Rotors (Only 3 used at a time)
-- 2 different non-rotating Rotors (Only 1 used at a time)
+- 2 different non-rotating Rotors (Only 1 used at a time, optional)
 - 10 Plugs (Setting 10 swapped letter pairs)
-- 2 Reflectors (Only 1 used at a time)
+- 5 Reflectors (Only 1 used at a time)
 
 # Rotors
 
@@ -50,6 +50,12 @@ Note: Rotors I-V only have 1 notch, Rotors VI-VIII have 2 notches, Rotors ß and
 The following Reflectors will be programmed for this exercise:
 
 Transforms [ABCDEFGHIJKLMNOPQRSTUVWXYZ] into the corresponding arrays
+
+Reflector A [EJMZALYXVBWFCRQUONTSPIKHGD]
+
+Reflector B [YRUHQSLDPXNGOKMIEBFZCWVJAT]
+
+Reflector C [FVPJIAOYEDRZXWGCTKUQSBNMHL]
 
 Reflector B Thin(b) [ENKQAUYWJICOPBLMDXZVFTHRGS]
 
@@ -158,10 +164,15 @@ The example used Rotors VII, VI, V, and Beta with thin Reflector C
 # Single Character Transcoding Process
 
 Enigma machine settings:
+
 Rotors: β, V, VI, VIII
+
 Offsets(Ring setting): 25, 15, 17, 03
+
 Initial position: CDUN
+
 Plugbaord configuration: AE.BF.CM.DQ.HU.JN.LX.PR.SZ.VW
+
 Reflector: c
 
 The fourth character from the previous example goes through the transcoding process as follows:

@@ -1,17 +1,5 @@
 defmodule Enigma.Rotor do
   @alphabet ~w(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
-  @default_rotors %{
-    # These rotors have 1 notch
-    I: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-    II: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
-    III: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
-    IV: "ESOVPZJAYQUIRHXLNFTGKDCMWB",
-    V: "VZBRGITYUPSDNHLXAWMJQOFECK",
-    # These rotors have 2 notches
-    VI: "JPGVOUMFYQBENHZRDKASXLICTW",
-    VII: "NZJHGRCXMYSWBOUFAIVLPEKQDT",
-    VIII: "FKQHTLXOCBJSPDZRAMEWNIUYGV"
-  }
 
   @moduledoc """
     Each rotor transforms the given letter using a simple caesar cipher.
@@ -38,9 +26,14 @@ defmodule Enigma.Rotor do
   # it will give you what values would be given when the signal passes through
   # the rotor on it's return trip (After hitting the reflector)
   def reverse_rotor(string) do
+    # if valid_rotor?(string) do
     convert_to_index(String.codepoints(string), @alphabet, [])
     |> index_to_letter()
     |> List.to_string()
+
+    # else
+    #   "Not a valid rotor"
+    # end
   end
 
   defp convert_to_index(stringList, [alphabetHead | []], indexList) do
@@ -80,7 +73,12 @@ defmodule Enigma.Rotor do
     |> index_to_letter(indexTail)
   end
 
-  # defp validate_rotor(string) do
-  #   String.upcase(string)
+  # defp valid_rotor?(string) do
+  #   string_list =
+  #     String.upcase(string)
+  #     |> String.codepoints()
+  #     |> Enum.sort()
+
+  #   string_list == @alphabet
   # end
 end
