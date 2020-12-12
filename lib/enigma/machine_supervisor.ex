@@ -9,7 +9,7 @@ defmodule Enigma.MachineSupervisor do
     DynamicSupervisor.init(strategy: :one_for_one)
   end
 
-  def start_child() do
-    DynamicSupervisor.start_child(__MODULE__, {Server, []})
+  def start_child(options) do
+    DynamicSupervisor.start_child(__MODULE__, {Enigma.Machine, options})
   end
 end

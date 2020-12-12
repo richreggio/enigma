@@ -4,25 +4,40 @@ defmodule Enigma do
   """
 
   @doc """
+  Creates an Enigma machine with the provided initial settings.
+
+  If no settings are provided then it will create a machine with 'default' settings.
+
+  Settings should be in a map similar to the default settings:
+
+  ```
+    %{
+      left_rotor: {["EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Y", "Q"], 0},
+      middle_rotor: {["AJDKSIRUXBLHWTMCQGZNPYFVOE", "M", "E"], 0},
+      right_rotor: {["BDFHJLCPRTXVZNYEIWGAKMUSQO", "D", "V"], 0},
+      optional_rotor: {"LEYJVCNIXWPBQMDRTAKZGFUHOS", 0},
+      reflector: "ENKQAUYWJICOPBLMDXZVFTHRGS"
+      plugboard: ["BV", "OW", "MP", "JL", "ZS", "HT", "RC", "YQ", "NX", "FI"]
+    }
+  ```
+
+  Note that if optional_rotor and plugboard aren't being used their values should be replaced with ```nil```
+  """
+  def setup_machine(options \\ []) do
+    Enigma.MachineSupervisor.start_child(options)
+  end
+
+  @doc """
   Takes a string and transcodes it.
   """
-  def transcode("FOLG ENDE SIST SOFO RTBE KANN TZUG EBEN") do
-    "RBBF PMHP HGCZ XTDY GAHG UFXG EWKB LKGJ"
+  def transcode(machine_pid, string) do
+    GenServer.call(machine_pid, {:transcode, string})
   end
 
-  def transcode(string) do
-    string
-  end
-
-  # Sets up the machine with my 'default' setting if an empty map is passsed
-  def setup_machine() do
-    Enigma.State.create_default()
-  end
-
-  def setup_machine(options) do
-    # Sets up the initial state of the Enigma machine
-    # Needs to know which rotors are used, their Ring Setting and their initial position.
-    # also needs to know which if any plugboard connections are being used
-    Enigma.State.setup_state(options)
+  @doc """
+  Sends a message to an already running GenServer and resets it to its initial state.
+  """
+  def restart(machine_pid) do
+    GenServer.call(machine_pid, {:restart})
   end
 end
