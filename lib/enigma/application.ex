@@ -5,7 +5,9 @@ defmodule Enigma.Application do
 
   @impl true
   def start(_type, _args) do
-    children = []
+    children = [
+      {Enigma.MachineSupervisor, []}
+    ]
 
     opts = [strategy: :one_for_one, name: Enigma.Supervisor]
     Supervisor.start_link(children, opts)
