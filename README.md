@@ -2,9 +2,9 @@
 
 A pure Elixir implementation of the Enigma machine.
 
-Currently in the planning stages.
+Created using the Enigma I, Enigma M3, and Enigma M4 units as a model.
 
-Please see the enigma_reference.md for information about what needs to be implemented
+Any message that was originally encoded with these machines is capable of being decoded by this machine.
 
 ## Installation
 

@@ -9,7 +9,8 @@ defmodule Enigma.Machine do
     {:ok, Enigma.State.setup_state(options)}
   end
 
-  def handle_call({:restart}, _from, state) do
+  def handle_call({:restart}, _from, %Enigma.State{original_state: options}) do
+    state = Enigma.State.setup_state(options)
     {:reply, state}
   end
 

@@ -1,15 +1,15 @@
 defmodule Enigma.State do
   @rotors %{
     # These rotors have 1 notch. String, Notch, Turnover
-    I: ["EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Y", "Q"],
-    II: ["AJDKSIRUXBLHWTMCQGZNPYFVOE", "M", "E"],
-    III: ["BDFHJLCPRTXVZNYEIWGAKMUSQO", "D", "V"],
-    IV: ["ESOVPZJAYQUIRHXLNFTGKDCMWB", "R", "J"],
-    V: ["VZBRGITYUPSDNHLXAWMJQOFECK", "H", "Z"],
+    I: ["EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q"],
+    II: ["AJDKSIRUXBLHWTMCQGZNPYFVOE", "E"],
+    III: ["BDFHJLCPRTXVZNYEIWGAKMUSQO", "V"],
+    IV: ["ESOVPZJAYQUIRHXLNFTGKDCMWB", "J"],
+    V: ["VZBRGITYUPSDNHLXAWMJQOFECK", "Z"],
     # These rotors have 2 notches
-    VI: ["JPGVOUMFYQBENHZRDKASXLICTW", "HU", "ZM"],
-    VII: ["NZJHGRCXMYSWBOUFAIVLPEKQDT", "HU", "ZM"],
-    VIII: ["FKQHTLXOCBJSPDZRAMEWNIUYGV", "HU", "ZM"],
+    VI: ["JPGVOUMFYQBENHZRDKASXLICTW", "ZM"],
+    VII: ["NZJHGRCXMYSWBOUFAIVLPEKQDT", "ZM"],
+    VIII: ["FKQHTLXOCBJSPDZRAMEWNIUYGV", "ZM"],
     # These rotors do not rotate and are 'optional' 4th rotors
     ß: "LEYJVCNIXWPBQMDRTAKZGFUHOS",
     γ: "FSOKANUERHMBTIYCWLQPZXVGJD"
@@ -27,37 +27,101 @@ defmodule Enigma.State do
   # The reflector, left, middle, and right rotors are required.
   # optional_rotor and plugboard can be left as nil if not used.
   defstruct(
-    optional_rotor: nil,
-    left_rotor: [],
-    middle_rotor: [],
-    right_rotor: [],
-    reflector: [],
-    plugboard: nil
+    original_state: %{
+      optional_rotor: nil,
+      left_rotor: [],
+      middle_rotor: [],
+      right_rotor: [],
+      reflector: [],
+      plugboard: nil
+    },
+    current_state: %{
+      optional_rotor: nil,
+      left_rotor: [],
+      middle_rotor: [],
+      right_rotor: [],
+      reflector: [],
+      plugboard: nil
+    }
   )
 
+  # Default setting
   def setup_state([]) do
-    create_default()
+    %{I: left, II: middle, III: right, ß: optional} = @rotors
+    %{b: reflector} = @reflectors
+    plugboard = ~w(BV OW MP JL ZS HT RC YQ NX FI)
+
+    setup_state(%{
+      left_rotor: {left, 1},
+      middle_rotor: {middle, 1},
+      right_rotor: {right, 1},
+      optional_rotor: {optional},
+      reflector: reflector,
+      plugboard: plugboard
+    })
+  end
+
+  def setup_state(:random) do
+    setup_state(%{
+      optional_rotor: random_optional_rotor(),
+      left_rotor: random_rotor(),
+      middle_rotor: random_rotor(),
+      right_rotor: random_rotor(),
+      reflector: random_reflector(),
+      plugboard: random_plugboard()
+    })
   end
 
   def setup_state(options) do
     %Enigma.State{
-      left_rotor: options
+      original_state: %{
+        optional_rotor: options.optional_rotor,
+        left_rotor: options.left_rotor,
+        middle_rotor: options.middle_rotor,
+        right_rotor: options.right_rotor,
+        reflector: options.reflector,
+        plugboard: options.plugboard
+      },
+      current_state: %{
+        optional_rotor: options.optional_rotor,
+        left_rotor: options.left_rotor,
+        middle_rotor: options.middle_rotor,
+        right_rotor: options.right_rotor,
+        reflector: options.reflector,
+        plugboard: options.plugboard
+      }
     }
   end
 
-  defp create_default() do
-    %{I: left_rotor, II: middle_rotor, III: right_rotor, ß: optional_rotor} = @rotors
-    %{b: reflector} = @reflectors
+  defp random_rotor() do
+    rotor_string =
+      Enum.take_random(?A..?Z, 26)
+      |> to_string()
 
-    # Each rotor is made up of a Tuple containing a list with a its encryption String, where the
-    # notch is, what letter place causes it to turnover, then its ring setting(offset)
-    %Enigma.State{
-      left_rotor: {left_rotor, 0},
-      middle_rotor: {middle_rotor, 0},
-      right_rotor: {right_rotor, 0},
-      optional_rotor: {optional_rotor, 0},
-      reflector: reflector,
-      plugboard: ["BV", "OW", "MP", "JL", "ZS", "HT", "RC", "YQ", "NX", "FI"]
-    }
+    turnover =
+      Enum.take_random(?A..?Z, 1)
+      |> to_string()
+
+    offset = Enum.take_random(1..26, 1)
+
+    {[rotor_string, turnover], offset}
+  end
+
+  defp random_optional_rotor() do
+    {[optional_string, _turnover], _offset} = random_rotor()
+    optional_string
+  end
+
+  defp random_reflector() do
+    Enum.take_random(?A..?Z, 26)
+    |> Enum.chunk_every(2)
+    |> Enum.map(&to_string(&1))
+  end
+
+  defp random_plugboard() do
+    Enum.take_random(?A..?Z, 26)
+    |> Enum.chunk_every(2)
+    |> Enum.take(10)
+    |> Enum.map(&to_string(&1))
   end
 end

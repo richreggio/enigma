@@ -22,18 +22,17 @@ defmodule Enigma.Rotor do
     this means that they have different behaviours that need to be implemented.
   """
 
+  def transform(single_character_input, _rotor) do
+    single_character_input
+  end
+
   # Given a string containing all 26 letters of the alphabet (i.e. a valid rotor)
   # it will give you what values would be given when the signal passes through
   # the rotor on it's return trip (After hitting the reflector)
   def reverse_rotor(string) do
-    # if valid_rotor?(string) do
     convert_to_index(String.codepoints(string), @alphabet, [])
     |> index_to_letter()
     |> List.to_string()
-
-    # else
-    #   "Not a valid rotor"
-    # end
   end
 
   defp convert_to_index(stringList, [alphabetHead | []], indexList) do
@@ -72,13 +71,4 @@ defmodule Enigma.Rotor do
     (List.wrap(nextLetter) ++ letterList)
     |> index_to_letter(indexTail)
   end
-
-  # defp valid_rotor?(string) do
-  #   string_list =
-  #     String.upcase(string)
-  #     |> String.codepoints()
-  #     |> Enum.sort()
-
-  #   string_list == @alphabet
-  # end
 end

@@ -1,10 +1,12 @@
 defmodule Enigma.Plugboard do
   # If the plugboard is not configured it should just be a passthrough
-  def transform(single_character_input, %Enigma.State{plugboard: nil}) do
+  def transform(single_character_input, %Enigma.State{current_state: %{plugboard: nil}}) do
     single_character_input
   end
 
-  def transform(single_character_input, %Enigma.State{plugboard: plugboard_config}) do
+  def transform(single_character_input, %Enigma.State{
+        current_state: %{plugboard: plugboard_config}
+      }) do
     # Check each configured plugboard swap to see if it contains the input character
     Enum.find(plugboard_config, &String.contains?(&1, single_character_input))
     |> process_result(single_character_input)

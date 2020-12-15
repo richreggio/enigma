@@ -6,16 +6,16 @@ defmodule Enigma do
   @doc """
   Creates an Enigma machine with the provided initial settings.
 
-  If no settings are provided then it will create a machine with 'default' settings.
+  If no settings are provided then it will create a machine with default settings.
 
   Settings should be in a map similar to the default settings:
 
   ```
     %{
-      left_rotor: {["EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Y", "Q"], 0},
-      middle_rotor: {["AJDKSIRUXBLHWTMCQGZNPYFVOE", "M", "E"], 0},
-      right_rotor: {["BDFHJLCPRTXVZNYEIWGAKMUSQO", "D", "V"], 0},
-      optional_rotor: {"LEYJVCNIXWPBQMDRTAKZGFUHOS", 0},
+      left_rotor: {["EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q"], 1},
+      middle_rotor: {["AJDKSIRUXBLHWTMCQGZNPYFVOE", "E"], 1},
+      right_rotor: {["BDFHJLCPRTXVZNYEIWGAKMUSQO", "V"], 1},
+      optional_rotor: "LEYJVCNIXWPBQMDRTAKZGFUHOS",
       reflector: "ENKQAUYWJICOPBLMDXZVFTHRGS"
       plugboard: ["BV", "OW", "MP", "JL", "ZS", "HT", "RC", "YQ", "NX", "FI"]
     }
